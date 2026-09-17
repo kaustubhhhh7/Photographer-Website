@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Default Luxury Colors (Dark by Default) */
+  --color-luxury-bg: var(--bg-primary);
+  --color-luxury-bg-sec: var(--bg-secondary);
+  --color-luxury-text: var(--text-primary);
+  --color-luxury-text-sec: var(--text-secondary);
+  --color-luxury-gold: var(--accent-gold);
+  --color-luxury-gold-light: var(--accent-gold-light);
+  --color-luxury-border: var(--border-color);
+
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+
+  --background-image-gold-gradient: linear-gradient(135deg, var(--accent-gold) 0%, #E2C27D 50%, var(--accent-gold) 100%);
+}
+
+@layer base {
+  :root {
+    /* Light Luxury Theme */
+    --bg-primary: #FDFCFB;
+    --bg-secondary: #FFFFFF;
+    --text-primary: #0A111E;
+    --text-secondary: #64748B;
+    --accent-gold: #B48D44;
+    --accent-gold-light: #C5A059;
+    --border-color: rgba(0, 0, 0, 0.05);
+    --glass-bg: rgba(253, 252, 251, 0.9);
+  }
+
+  [data-theme='dark'] {
+    /* Dark Luxury Theme (Original) */
+    --bg-primary: #0A111E;
+    --bg-secondary: #0D1626;
+    --text-primary: #FDFCFB;
+    --text-secondary: #94A3B8;
+    --accent-gold: #C5A059;
+    --accent-gold-light: #D4AF37;
+    --border-color: rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(10, 17, 30, 0.9);
+  }
+
+  html {
+    font-size: 90%; /* Slightly smaller on mobile */
+    scroll-behavior: smooth;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    /* Firefox */
+  }
+
+  @media (min-width: 768px) {
+    html {
+      font-size: 85%; /* Smaller on tablet */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      font-size: 80%; /* Significantly smaller on desktop to fit more content */
+    }
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Edge */
+  }
+
+  body {
+    @apply bg-luxury-bg text-luxury-text font-sans antialiased selection:bg-luxury-gold selection:text-white;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif tracking-tight text-luxury-text;
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply px-8 py-3 bg-luxury-gold text-white font-medium rounded-sm transition-all duration-500 active:scale-95 relative overflow-hidden text-center;
+
+    &:hover {
+      @apply bg-luxury-gold-light;
+      box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+    }
+  }
+
+  .btn-outline {
+    @apply px-8 py-3 border border-luxury-gold text-luxury-gold font-medium rounded-sm transition-all duration-500 active:scale-95 text-center;
+
+    &:hover {
+      @apply bg-luxury-gold text-white;
+      box-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
+    }
+  }
+
+  .section-title {
+    @apply text-4xl md:text-6xl font-bold mb-8 leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-luxury-gold font-semibold tracking-[0.3em] uppercase text-xs mb-4 block;
+  }
+
+  .gold-glow {
+    transition: shadow 0.5s ease;
+
+    &:hover {
+      box-shadow: 0 0 25px rgba(197, 160, 89, 0.2);
+    }
+  }
+
+  .card-premium {
+    @apply bg-luxury-bg-sec border border-luxury-border p-8 transition-all duration-500;
+
+    &:hover {
+      @apply shadow-2xl -translate-y-1 border-luxury-gold/30;
+    }
+  }
+}
+
+/* Custom Utilities */
+.glass-nav {
+  background: var(--glass-bg);
+  @apply backdrop-blur-xl border-b border-luxury-border;
+}
+
+.text-gradient-gold {
+  background: var(--background-image-gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.nav-link {
+  @apply relative text-sm font-medium tracking-wide transition-colors duration-300 py-1;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-px bg-luxury-gold transition-all duration-300;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  @apply w-full;
+}
+
+.section-divider {
+  @apply w-24 h-px mb-8;
+  background: var(--background-image-gold-gradient);
+}
